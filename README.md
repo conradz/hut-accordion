@@ -1,5 +1,10 @@
 # hut-accordion
 
+[![NPM](https://nodei.co/npm/hut-accordion.png?compact=true)](https://nodei.co/npm/hut-accordion/)
+
+[![Build Status](https://drone.io/github.com/conradz/hut-accordion/status.png)](https://drone.io/github.com/conradz/hut-accordion/latest)
+[![Dependency Status](https://gemnasium.com/conradz/hut-accordion.png)](https://gemnasium.com/conradz/hut-accordion)
+
 HTML UI Toolkit accordion component
 
 A simple accordion where only one section can be opened at a time from multiple
