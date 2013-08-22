@@ -7,6 +7,8 @@ sections.
 
 ## Example
 
+[View the live example](http://conradz.github.io/hut-accordion)
+
 With the following HTML:
 
 ```html
