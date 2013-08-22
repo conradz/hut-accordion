@@ -1,5 +1,6 @@
 var Accordion = require('../'),
-    events = require('chi-events');
+    events = require('chi-events'),
+    document = window.document;
 
 function $(selector) {
     return document.querySelector(selector);

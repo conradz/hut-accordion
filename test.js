@@ -84,4 +84,4 @@ test('selecting section triggers the select event', function(t) {
     t.equal(selected, null);
 
     t.end();
-})
+});

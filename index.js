@@ -11,7 +11,7 @@ function Accordion(element) {
     var headers = element.querySelectorAll(
             '.accordion-section > .accordion-header'),
         self = this;
-    events(headers).on('click', function(header) {
+    events(headers).on('click', function() {
         self.select(this.parentNode);
     });
 }
