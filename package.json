@@ -1,0 +1,41 @@
+{
+  "name": "hut-accordion",
+  "version": "0.0.0",
+  "description": "HTML UI Toolkit accordion component",
+  "main": "index.js",
+  "style": "index.css",
+  "scripts": {
+    "test": "hut-build test",
+    "lint": "hut-build lint",
+    "build": "hut-build build",
+    "serve": "hut-build serve",
+    "serve-test": "hut-build serve-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conradz/hut-accordion.git"
+  },
+  "keywords": [
+    "accordion",
+    "html",
+    "hut",
+    "ui",
+    "dom",
+    "browser",
+    "browserify"
+  ],
+  "author": "Conrad Zimmerman <me@conradz.com>",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/conradz/hut-accordion/issues"
+  },
+  "devDependencies": {
+    "tape": "~1.0.4",
+    "hut-build": "0.0.3",
+    "chi-create": "0.0.1"
+  },
+  "dependencies": {
+    "chi-events": "0.0.3",
+    "chi-classes": "0.0.2"
+  }
+}

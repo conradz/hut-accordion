@@ -1,0 +1,18 @@
+.accordion-section {
+    border: 1px solid #EEE;
+    padding: 0 10px;
+    margin-bottom: 5px;
+}
+
+.accordion-header {
+    cursor: pointer;
+}
+
+.accordion-content {
+    overflow: hidden;
+    height: 0;
+}
+
+.accordion-selected .accordion-content {
+    height: auto;
+}
