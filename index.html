@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>hut-accordion</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="content">
+    <header>
+        <h1>Accordion Example</h1>
+    </header>
+
+    <section>
+        <p>
+            Click on the section headings to open a section. The buttons below
+            demonstrate control from JS.
+        </p>
+        <p>
+            <button id="select-dogs">Select Dogs</button>
+            <button id="collapse">Collapse</button>
+        </p>
+    </section>
+
+    <div id="my-accordion" class="hut-accordion">
+        <div class="accordion-section">
+            <header class="accordion-header">
+                <h3>Main</h3>
+            </header>
+            <section class="accordion-content">
+                <p>Some content for main section.</p>
+            </section>
+        </div>
+        <div id="cat-section" class="accordion-section">
+            <header class="accordion-header">
+                <h3>Cats</h3>
+            </header>
+            <section class="accordion-content">
+                <p>Some cute kittens...</p>
+            </section>
+        </div>
+        <div id="dog-section" class="accordion-section">
+            <header class="accordion-header">
+                <h3>Dogs</h3>
+            </header>
+            <section class="accordion-content">
+                <p>Some cute puppies...</p>
+            </section>
+        </div>
+    </div>
+</div>
+        <script src="script.js"></script>
+    </body>
+</html>

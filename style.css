@@ -1,0 +1,44 @@
+.hut-accordion .accordion-section {
+    border: 1px solid #EEE;
+    padding: 0 10px;
+    margin-bottom: 5px;
+}
+
+.hut-accordion .accordion-header {
+    cursor: pointer;
+}
+
+.hut-accordion .accordion-content {
+    overflow: hidden;
+    height: 0;
+}
+
+.hut-accordion .accordion-selected .accordion-content {
+    height: auto;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    overflow: auto;
+    padding: 0 10px;
+}
+
+.content {
+    overflow: hidden;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#my-accordion {
+    max-width: 300px;
+}
