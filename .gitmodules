@@ -1,3 +1,6 @@
 [submodule "dist"]
 	path = dist
 	url = https://github.com/conradz/hut-accordion.git
+[submodule "example/build"]
+	path = example/build
+	url = https://github.com/conradz/hut-accordion.git
