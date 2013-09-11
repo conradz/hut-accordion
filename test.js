@@ -59,14 +59,37 @@ test('selecting section closes other sections', function(t) {
     t.end();
 });
 
-test('clicking section header selects section', function(t) {
+test('switching section adds the accordion-removing class', function(t) {
+    var el = createStructure(),
+        section1 = el.querySelector('.section-1'),
+        section2 = el.querySelector('.section-2'),
+        a = new Accordion(el);
+        
+    a.select(section1);
+    t.notOk(classes(el).has('accordion-removing'));
+    
+    a.select(section2);
+    t.ok(classes(el).has('accordion-removing'));
+    
+    a.select(null);
+    a.select(section1);
+    t.notOk(classes(el).has('accordion-removing'));
+    
+    t.end();
+});
+
+test('clicking section header toggles section', function(t) {
     var el = createStructure(),
         section = el.querySelector('.section-1'),
         header = el.querySelector('.header-1'),
         a = new Accordion(el);
+        
     events(header).trigger('click');
-
     t.equal(a.selected, section);
+    
+    events(header).trigger('click');
+    t.equal(a.selected, null);
+    
     t.end();
 });
 
@@ -83,5 +106,26 @@ test('selecting section triggers the select event', function(t) {
     a.select(null);
     t.equal(selected, null);
 
+    t.end();
+});
+
+test('toggle opens a section if it is not currently selected', function(t) {
+    var el = createStructure(),
+        section = el.querySelector('.section-1'),
+        a = new Accordion(el);
+    a.toggle(section);
+    
+    t.equal(a.selected, section);
+    t.end();
+});
+
+test('toggle closes a section if it is currently selected', function(t) {
+    var el = createStructure(),
+        section = el.querySelector('.section-1'),
+        a = new Accordion(el);
+    a.select(section);
+    a.toggle(section);
+    
+    t.equal(a.selected, null);
     t.end();
 });

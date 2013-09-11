@@ -12,12 +12,20 @@ function Accordion(element) {
             '.accordion-section > .accordion-header'),
         self = this;
     events(headers).on('click', function() {
-        self.select(this.parentNode);
+        self.toggle(this.parentNode);
     });
 }
 
 Accordion.prototype = Object.create(EventEmitter.prototype);
 Accordion.prototype.constructor = Accordion;
+
+Accordion.prototype.toggle = function(section) {
+    if (this.selected === section) {
+        this.select(null);
+    } else {
+        this.select(section);
+    }
+};
 
 Accordion.prototype.select = function(section) {
     if (this.selected === section) {

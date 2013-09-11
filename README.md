@@ -14,6 +14,9 @@ sections.
 
 ## Example
 
+Use the following HTML and JS to create an accordion. When a header is clicked,
+it will be opened. If that section is currently opened, it will be closed.
+
 ```html
 <div id="my-accordion" class="hut-accordion">
     <div class="accordion-section">
@@ -66,6 +69,11 @@ sections are selected.
 
 Contains the currently selected `.accordion-section` element, or `null` if no
 section is selected.
+
+### `#toggle(element)`
+
+If the section indicated by `element` is currently selected, it will be closed.
+Otherwise the section will be selected.
 
 ### `#select([element])`
 
