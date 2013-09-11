@@ -2,54 +2,91 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>hut-accordion</title>
-        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HUT Modal</title>
+        <link rel="stylesheet" href="example.css">
     </head>
     <body>
-        <div class="content">
-    <header>
-        <h1>Accordion Example</h1>
-    </header>
+        <div class="container">
+            <header>
+                <h1>Accordion Example</h1>
+            </header>
 
-    <section>
-        <p>
-            Click on the section headings to open a section. The buttons below
-            demonstrate control from JS.
-        </p>
-        <p>
-            <button id="select-dogs">Select Dogs</button>
-            <button id="collapse">Collapse</button>
-        </p>
-    </section>
+            <section>
+                <p>
+                    Click on the section headings to open a section. The buttons below
+                    demonstrate control from JS.
+                </p>
+                <p>
+                    <button id="select-more">Select More</button>
+                    <button id="collapse">Collapse</button>
+                </p>
+            </section>
 
-    <div id="my-accordion" class="hut-accordion">
-        <div class="accordion-section">
-            <header class="accordion-header">
-                <h3>Main</h3>
-            </header>
-            <section class="accordion-content">
-                <p>Some content for main section.</p>
-            </section>
+            <div id="my-accordion" class="hut-accordion">
+                <div class="accordion-section">
+                    <header class="accordion-header">
+                        <h3>Section</h3>
+                    </header>
+                    <section class="accordion-content">
+                        <p>
+                            Vivamus porta leo eu tellus placerat ac suscipit
+                            felis interdum. Suspendisse augue orci, placerat id
+                            mattis ac, tincidunt blandit orci. Sed erat nibh,
+                            condimentum ut aliquam sit amet, consequat ut diam.
+                            Curabitur ut purus sed tortor fringilla rhoncus.
+                            Cras egestas suscipit facilisis. Donec adipiscing
+                            ultrices vestibulum. Cras tristique dictum sapien,
+                            non euismod lectus vulputate ac. Aliquam luctus erat
+                            nec lacus mollis et dapibus ligula tempor. Duis
+                            rhoncus ipsum ut risus placerat sit amet fringilla
+                            lacus elementum. Fusce a est elit, ac mattis turpis.
+                            Curabitur ac euismod libero.
+                        </p>
+                    </section>
+                </div>
+                <div id="more-section" class="accordion-section">
+                    <header class="accordion-header">
+                        <h3>More</h3>
+                    </header>
+                    <section class="accordion-content">
+                        <p>
+                            Maecenas interdum feugiat leo, in suscipit dolor
+                            pellentesque facilisis. Aliquam tristique dapibus
+                            nisl, quis hendrerit odio venenatis laoreet.
+                            Vestibulum velit dolor, ultrices at feugiat vitae,
+                            accumsan ac ligula. Aliquam condimentum dictum nibh
+                            ut sagittis. Sed volutpat facilisis diam, id laoreet
+                            purus vulputate in. Quisque nec ligula sit amet
+                            mauris facilisis rutrum. Maecenas aliquet porttitor
+                            dui, et porta augue consectetur et. Cum sociis
+                            natoque penatibus et magnis dis parturient montes,
+                            nascetur ridiculus mus. Integer malesuada placerat
+                            urna ac iaculis. Proin laoreet semper tempus. Sed
+                            molestie turpis ac dolor condimentum et tincidunt
+                            erat pellentesque. In augue orci, tempor in faucibus
+                            sed, aliquet quis orci. Class aptent taciti sociosqu
+                            ad litora torquent per conubia nostra, per inceptos
+                            himenaeos. Integer pharetra quam at mi venenatis non
+                            adipiscing magna lacinia. Nullam quis enim mi, ut
+                            viverra eros.
+                        </p>
+                    </section>
+                </div>
+                <div class="accordion-section">
+                    <header class="accordion-header">
+                        <h3>Another Section</h3>
+                    </header>
+                    <section class="accordion-content">
+                        <p>
+                            Fusce mollis velit non lectus volutpat quis cursus
+                            ante commodo.
+                        </p>
+                    </section>
+                </div>
+            </div>
         </div>
-        <div id="cat-section" class="accordion-section">
-            <header class="accordion-header">
-                <h3>Cats</h3>
-            </header>
-            <section class="accordion-content">
-                <p>Some cute kittens...</p>
-            </section>
-        </div>
-        <div id="dog-section" class="accordion-section">
-            <header class="accordion-header">
-                <h3>Dogs</h3>
-            </header>
-            <section class="accordion-content">
-                <p>Some cute puppies...</p>
-            </section>
-        </div>
-    </div>
-</div>
-        <script src="script.js"></script>
+
+        <script src="example.js"></script>
     </body>
 </html>

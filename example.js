@@ -9,13 +9,14 @@ function $(selector) {
 
 var myAccordion = new Accordion($('#my-accordion'));
 
-events($('#select-dogs')).on('click', function() {
-    myAccordion.select($('#dog-section'));
+events($('#select-more')).on('click', function() {
+    myAccordion.select($('#more-section'));
 });
 
 events($('#collapse')).on('click', function() {
     myAccordion.select(null);
 });
+
 },{"../":2,"chi-events":4}],2:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter,
     events = require('chi-events'),
@@ -31,12 +32,20 @@ function Accordion(element) {
             '.accordion-section > .accordion-header'),
         self = this;
     events(headers).on('click', function() {
-        self.select(this.parentNode);
+        self.toggle(this.parentNode);
     });
 }
 
 Accordion.prototype = Object.create(EventEmitter.prototype);
 Accordion.prototype.constructor = Accordion;
+
+Accordion.prototype.toggle = function(section) {
+    if (this.selected === section) {
+        this.select(null);
+    } else {
+        this.select(section);
+    }
+};
 
 Accordion.prototype.select = function(section) {
     if (this.selected === section) {
@@ -46,6 +55,9 @@ Accordion.prototype.select = function(section) {
     if (this.selected !== null) {
         var current = this.selected;
         classes(current).remove('accordion-selected');
+        classes(this.element).add('accordion-removing');
+    } else {
+        classes(this.element).remove('accordion-removing');
     }
 
     if (section) {
@@ -59,6 +71,7 @@ Accordion.prototype.select = function(section) {
 };
 
 module.exports = Accordion;
+
 },{"chi-classes":3,"chi-events":4,"events":6}],3:[function(require,module,exports){
 var CLASS_SEP = /\s+/g;
 
