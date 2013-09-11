@@ -1,18 +1,54 @@
+@import "hut-base";
+@import "./variables";
+
 .hut-accordion .accordion-section {
-    border: 1px solid #EEE;
-    padding: 0 10px;
+    border: 1px solid var(accordion-border-color);
+    padding: 0 var(accordion-padding);
     margin-bottom: 5px;
+
+    overflow: hidden;
 }
 
 .hut-accordion .accordion-header {
     cursor: pointer;
 }
 
+.hut-accordion .accordion-header h1,
+.hut-accordion .accordion-header h2,
+.hut-accordion .accordion-header h3,
+.hut-accordion .accordion-header h4,
+.hut-accordion .accordion-header h5,
+.hut-accordion .accordion-header h6 {
+    /* Make all headings have the same top and bottom margin */
+    margin: var(accordion-heading-margin) 0;
+}
+
 .hut-accordion .accordion-content {
     overflow: hidden;
-    height: 0;
+    position: relative;
+
+    /* Set max-height instead of height since height cannot be transitioned */
+    max-height: 0;
+
+    /* Position off the screen to the left to slide in when shown */
+    left: -100%;
+    
+    /* When transitioning out */
+    /* Do not wait to slide out, wait to collapse until slide out is done */
+    transition: left var(accordion-slide-out-time) 0, max-height 0 var(accordion-slide-out-time);
 }
 
 .hut-accordion .accordion-selected .accordion-content {
-    height: auto;
+    max-height: 100000px;
+    left: 0;
+    
+    /* When transitioning in when no other section is being removed */
+    /* Immediately slide out */
+    transition: left var(accordion-slide-in-time) 0, max-height 0 0;
+}
+
+.hut-accordion.accordion-removing .accordion-selected .accordion-content {
+    /* When transitioning in when another section is being removed */
+    /* Wait to until other section is collapsed */
+    transition: left var(accordion-slide-in-time) var(accordion-slide-out-time), max-height 0 var(accordion-slide-out-time);
 }

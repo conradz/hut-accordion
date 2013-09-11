@@ -27,6 +27,9 @@ Accordion.prototype.select = function(section) {
     if (this.selected !== null) {
         var current = this.selected;
         classes(current).remove('accordion-selected');
+        classes(this.element).add('accordion-removing');
+    } else {
+        classes(this.element).remove('accordion-removing');
     }
 
     if (section) {

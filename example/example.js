@@ -8,8 +8,8 @@ function $(selector) {
 
 var myAccordion = new Accordion($('#my-accordion'));
 
-events($('#select-dogs')).on('click', function() {
-    myAccordion.select($('#dog-section'));
+events($('#select-more')).on('click', function() {
+    myAccordion.select($('#more-section'));
 });
 
 events($('#collapse')).on('click', function() {
