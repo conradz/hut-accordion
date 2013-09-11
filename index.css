@@ -32,23 +32,26 @@
 
     /* Position off the screen to the left to slide in when shown */
     left: -100%;
-    
+
     /* When transitioning out */
     /* Do not wait to slide out, wait to collapse until slide out is done */
-    transition: left var(accordion-slide-out-time) 0, max-height 0 var(accordion-slide-out-time);
+    transition-property: left, max-height;
+    transition-delay: 0s, var(accordion-slide-out-time);
+    transition-duration: var(accordion-slide-out-time), 0s;
 }
 
 .hut-accordion .accordion-selected .accordion-content {
     max-height: 100000px;
     left: 0;
-    
+
     /* When transitioning in when no other section is being removed */
     /* Immediately slide out */
-    transition: left var(accordion-slide-in-time) 0, max-height 0 0;
+    transition-delay: 0s, 0s;
+    transition-duration: var(accordion-slide-in-time), 0s;
 }
 
 .hut-accordion.accordion-removing .accordion-selected .accordion-content {
     /* When transitioning in when another section is being removed */
     /* Wait to until other section is collapsed */
-    transition: left var(accordion-slide-in-time) var(accordion-slide-out-time), max-height 0 var(accordion-slide-out-time);
+    transition-delay: var(accordion-slide-out-time), var(accordion-slide-out-time);
 }
