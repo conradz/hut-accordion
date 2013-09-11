@@ -200,7 +200,9 @@ button:active {
   left: -100%;
   /* When transitioning out */
   /* Do not wait to slide out, wait to collapse until slide out is done */
-  transition: left 0.2s 0, max-height 0 0.2s;
+  transition-property: left, max-height;
+  transition-delay: 0s, 0.2s;
+  transition-duration: 0.2s, 0s;
 }
 
 .hut-accordion .accordion-selected .accordion-content {
@@ -208,13 +210,14 @@ button:active {
   left: 0;
   /* When transitioning in when no other section is being removed */
   /* Immediately slide out */
-  transition: left 0.3s 0, max-height 0 0;
+  transition-delay: 0s, 0s;
+  transition-duration: 0.3s, 0s;
 }
 
 .hut-accordion.accordion-removing .accordion-selected .accordion-content {
   /* When transitioning in when another section is being removed */
   /* Wait to until other section is collapsed */
-  transition: left 0.3s 0.2s, max-height 0 0.2s;
+  transition-delay: 0.2s, 0.2s;
 }
 
 .container {
