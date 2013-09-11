@@ -8,7 +8,7 @@
     "test": "hut-build test",
     "lint": "hut-build lint",
     "build": "hut-build build",
-    "serve": "hut-build serve",
+    "serve": "hut-build serve --debug",
     "serve-test": "hut-build serve-test"
   },
   "repository": {
@@ -30,8 +30,8 @@
     "url": "https://github.com/conradz/hut-accordion/issues"
   },
   "devDependencies": {
-    "tape": "~1.0.4",
-    "hut-build": "0.0.3",
+    "tape": "~1.1.0",
+    "hut-build": "~0.1.2",
     "chi-create": "0.0.1"
   },
   "dependencies": {
