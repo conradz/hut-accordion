@@ -1,4 +1,4 @@
-var EventEmitter = require('events').EventEmitter,
+var Emitter = require('emitter-component'),
     events = require('chi-events'),
     classes = require('chi-classes'),
     inheritPrototype = require('mout/lang/inheritPrototype');
@@ -6,7 +6,7 @@ var EventEmitter = require('events').EventEmitter,
 module.exports = Accordion;
 
 function Accordion(element) {
-    EventEmitter.call(this);
+    Emitter.call(this);
 
     this.element = element;
     this.selected = null;
@@ -20,7 +20,7 @@ function Accordion(element) {
     });
 }
 
-inheritPrototype(Accordion, EventEmitter);
+inheritPrototype(Accordion, Emitter);
 
 Accordion.prototype.toggle = function(section) {
     if (this.selected === section) {
