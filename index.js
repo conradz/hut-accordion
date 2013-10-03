@@ -1,6 +1,9 @@
 var EventEmitter = require('events').EventEmitter,
     events = require('chi-events'),
-    classes = require('chi-classes');
+    classes = require('chi-classes'),
+    inheritPrototype = require('mout/lang/inheritPrototype');
+
+module.exports = Accordion;
 
 function Accordion(element) {
     EventEmitter.call(this);
@@ -11,20 +14,20 @@ function Accordion(element) {
     var headers = element.querySelectorAll(
             '.accordion-section > .accordion-header'),
         self = this;
+
     events(headers).on('click', function() {
         self.toggle(this.parentNode);
     });
 }
 
-Accordion.prototype = Object.create(EventEmitter.prototype);
-Accordion.prototype.constructor = Accordion;
+inheritPrototype(Accordion, EventEmitter);
 
 Accordion.prototype.toggle = function(section) {
     if (this.selected === section) {
-        this.select(null);
-    } else {
-        this.select(section);
+        section = null;
     }
+
+    this.select(section);
 };
 
 Accordion.prototype.select = function(section) {
@@ -49,5 +52,3 @@ Accordion.prototype.select = function(section) {
 
     this.emit('select', this.selected);
 };
-
-module.exports = Accordion;
