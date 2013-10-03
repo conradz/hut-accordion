@@ -5,6 +5,8 @@
 [![Build Status](https://drone.io/github.com/conradz/hut-accordion/status.png)](https://drone.io/github.com/conradz/hut-accordion/latest)
 [![Dependency Status](https://gemnasium.com/conradz/hut-accordion.png)](https://gemnasium.com/conradz/hut-accordion)
 
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/hut-accordion.svg)](https://saucelabs.com/u/hut-accordion)
+
 HTML UI Toolkit accordion component
 
 Check out the [example](http://conradz.github.io/hut-accordion)!
