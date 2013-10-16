@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "chi-events": "0.0.4",
-    "chi-classes": "0.0.3",
+    "chi-classes": "0.0.4",
     "hut-base": "0.0.2",
     "mout": "~0.7.1",
     "emitter-component": "~1.0.1"
