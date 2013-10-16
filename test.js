@@ -129,3 +129,47 @@ test('toggle closes a section if it is currently selected', function(t) {
     t.equal(a.selected, null);
     t.end();
 });
+
+test('add a new section', function(t) {
+    var el = createStructure(),
+        a = new Accordion(el),
+        section = create('div', { 'class': 'accordion-section' },
+            create('div', { 'class': 'accordion-header' },
+                create('h3', 'Section 3')
+            ),
+            create('div', { 'class': 'accordion-content' },
+                create('p', 'Section content')
+            )
+        );
+
+    a.add(section);
+    a.select(section);
+
+    t.equal(a.selected, section);
+    t.equal(el.children[2], section);
+    t.end();
+});
+
+test('remove a section', function(t) {
+    var el = createStructure(),
+        a = new Accordion(el),
+        section = el.children[1];
+
+    a.select(section);
+    a.remove(section);
+
+    t.equal(el.children.length, 1);
+    t.equal(a.selected, null);
+    t.end();
+});
+
+test('clear all sections', function(t) {
+    var el = createStructure(),
+        a = new Accordion(el);
+    a.select(el.children[0]);
+    a.clear();
+
+    t.equal(el.children.length, 0);
+    t.equal(a.selected, null);
+    t.end();
+});
