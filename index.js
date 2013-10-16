@@ -45,7 +45,7 @@ Accordion.prototype.add = function(el) {
 Accordion.prototype.remove = function(el) {
     var section = find(
         this._sections,
-        function(s) { return s.el === el });
+        function(s) { return s.el === el; });
     if (!section) {
         return;
     }
