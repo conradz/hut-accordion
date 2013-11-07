@@ -1,10 +1,11 @@
 'use strict';
 
-var test = require('tape'),
+var tape = require('tape'),
     Accordion = require('./'),
     classes = require('chi-classes'),
     events = require('chi-events'),
-    create = require('chi-create');
+    create = require('chi-create'),
+    body = window.document.body;
 
 function createStructure() {
     return create('div', { 'class': 'hut-accordion' },
@@ -27,18 +28,25 @@ function createStructure() {
     );
 }
 
-test('create accordion', function(t) {
-    var el = createStructure(),
-        a = new Accordion(el);
+function test(name, func) {
+    tape(name, function(t) {
+        var dom = createStructure();
+        body.appendChild(dom);
+        func(t, dom);
+        body.removeChild(dom);
+    });
+}
+
+test('create accordion', function(t, el) {
+    var a = new Accordion(el);
 
     t.equal(a.element, el);
     t.equal(a.selected, null);
     t.end();
 });
 
-test('select accordion section', function(t) {
-    var el = createStructure(),
-        section = el.querySelector('.section-2'),
+test('select accordion section', function(t, el) {
+    var section = el.querySelector('.section-2'),
         a = new Accordion(el);
     a.select(section);
 
@@ -47,9 +55,8 @@ test('select accordion section', function(t) {
     t.end();
 });
 
-test('selecting section closes other sections', function(t) {
-    var el = createStructure(),
-        section1 = el.querySelector('.section-1'),
+test('selecting section closes other sections', function(t, el) {
+    var section1 = el.querySelector('.section-1'),
         section2 = el.querySelector('.section-2'),
         a = new Accordion(el);
     a.select(section1);
@@ -61,9 +68,8 @@ test('selecting section closes other sections', function(t) {
     t.end();
 });
 
-test('switching section adds the accordion-removing class', function(t) {
-    var el = createStructure(),
-        section1 = el.querySelector('.section-1'),
+test('switching section adds the accordion-removing class', function(t, el) {
+    var section1 = el.querySelector('.section-1'),
         section2 = el.querySelector('.section-2'),
         a = new Accordion(el);
         
@@ -80,9 +86,8 @@ test('switching section adds the accordion-removing class', function(t) {
     t.end();
 });
 
-test('clicking section header toggles section', function(t) {
-    var el = createStructure(),
-        section = el.querySelector('.section-1'),
+test('clicking section header toggles section', function(t, el) {
+    var section = el.querySelector('.section-1'),
         header = el.querySelector('.header-1'),
         a = new Accordion(el);
         
@@ -95,9 +100,8 @@ test('clicking section header toggles section', function(t) {
     t.end();
 });
 
-test('selecting section triggers the select event', function(t) {
-    var el = createStructure(),
-        selected = null,
+test('selecting section triggers the select event', function(t, el) {
+    var selected = null,
         section = el.querySelector('.section-1'),
         a = new Accordion(el);
     a.on('select', function(s) { selected = s; });
@@ -111,9 +115,8 @@ test('selecting section triggers the select event', function(t) {
     t.end();
 });
 
-test('toggle opens a section if it is not currently selected', function(t) {
-    var el = createStructure(),
-        section = el.querySelector('.section-1'),
+test('toggle opens a section if it is not currently selected', function(t, el) {
+    var section = el.querySelector('.section-1'),
         a = new Accordion(el);
     a.toggle(section);
     
@@ -121,57 +124,12 @@ test('toggle opens a section if it is not currently selected', function(t) {
     t.end();
 });
 
-test('toggle closes a section if it is currently selected', function(t) {
-    var el = createStructure(),
-        section = el.querySelector('.section-1'),
+test('toggle closes a section if it is currently selected', function(t, el) {
+    var section = el.querySelector('.section-1'),
         a = new Accordion(el);
     a.select(section);
     a.toggle(section);
     
-    t.equal(a.selected, null);
-    t.end();
-});
-
-test('add a new section', function(t) {
-    var el = createStructure(),
-        a = new Accordion(el),
-        section = create('div', { 'class': 'accordion-section' },
-            create('div', { 'class': 'accordion-header' },
-                create('h3', 'Section 3')
-            ),
-            create('div', { 'class': 'accordion-content' },
-                create('p', 'Section content')
-            )
-        );
-
-    a.add(section);
-    a.select(section);
-
-    t.equal(a.selected, section);
-    t.equal(el.children[2], section);
-    t.end();
-});
-
-test('remove a section', function(t) {
-    var el = createStructure(),
-        a = new Accordion(el),
-        section = el.children[1];
-
-    a.select(section);
-    a.remove(section);
-
-    t.equal(el.children.length, 1);
-    t.equal(a.selected, null);
-    t.end();
-});
-
-test('clear all sections', function(t) {
-    var el = createStructure(),
-        a = new Accordion(el);
-    a.select(el.children[0]);
-    a.clear();
-
-    t.equal(el.children.length, 0);
     t.equal(a.selected, null);
     t.end();
 });

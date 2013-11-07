@@ -29,7 +29,7 @@ events($('#add-section')).on('click', function() {
             create('section', { 'class': 'accordion-content' },
                 create('p', 'Section ' + num + ' content.')));
 
-    accordion.add(section);
+    element.appendChild(section);
 });
 
 events($('#remove-section')).on('click', function() {
@@ -38,5 +38,5 @@ events($('#remove-section')).on('click', function() {
         return;
     }
 
-    accordion.remove(sections[sections.length - 1]);
+    element.removeChild(sections[sections.length - 1]);
 });

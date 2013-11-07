@@ -84,20 +84,6 @@ must be a `.accordion-section` element or else `null`. If `element` is `null` or
 `undefined`, the currently selected section will be collapsed and no new section
 will be selected.
 
-### `add(element)`
-
-Adds a new `.accordion-section` element to the accordion. It will append it to
-the main accordion element and add the required event handlers.
-
-### `remove(element)`
-
-Removes the `.accordion-section` element from the accordion. It will remove the
-element and event handlers.
-
-### `clear()`
-
-Removes all the sections from the accordion.
-
 ### `Event: selected(element)`
 
 Triggered when the selected section changes. `element` will be a

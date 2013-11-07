@@ -34,7 +34,7 @@
     "chi-create": "0.0.2"
   },
   "dependencies": {
-    "chi-events": "0.0.4",
+    "chi-events": "0.1.0",
     "chi-classes": "0.0.4",
     "hut-base": "0.0.2",
     "mout": "~0.7.1",
