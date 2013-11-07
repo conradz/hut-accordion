@@ -1,3 +1,5 @@
+'use strict';
+
 var Accordion = require('../'),
     events = require('chi-events'),
     create = require('chi-create'),

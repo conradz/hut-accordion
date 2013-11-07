@@ -1,3 +1,5 @@
+'use strict';
+
 var test = require('tape'),
     Accordion = require('./'),
     classes = require('chi-classes'),

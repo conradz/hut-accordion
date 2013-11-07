@@ -8,8 +8,7 @@
     "test": "hut-build test",
     "lint": "hut-build lint",
     "build": "hut-build build",
-    "serve": "hut-build serve --debug",
-    "serve-test": "hut-build serve-test"
+    "start": "hut-build serve"
   },
   "repository": {
     "type": "git",
@@ -31,7 +30,7 @@
   },
   "devDependencies": {
     "tape": "~1.1.0",
-    "hut-build": "~0.1.5",
+    "hut-build": "~0.2.0",
     "chi-create": "0.0.2"
   },
   "dependencies": {

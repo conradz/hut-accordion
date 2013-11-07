@@ -1,3 +1,5 @@
+'use strict';
+
 var Emitter = require('emitter-component'),
     events = require('chi-events'),
     classes = require('chi-classes'),
