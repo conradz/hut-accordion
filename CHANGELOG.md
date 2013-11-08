@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.5
+
+ * Use delegated events for listeners
+ * Remove `add`, `remove`, and `clear` (delegated listeners remove need for
+   explicitly registering listeners)
+
 ## 0.0.4
 
  * Add methods for dynamically adding/removing sections
