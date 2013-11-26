@@ -37,7 +37,7 @@
     "chi-events": "~0.1.0",
     "chi-classes": "0.0.4",
     "hut-base": "0.0.3",
-    "mout": "~0.7.1",
+    "mout": "~0.8.0",
     "emitter-component": "~1.1.0"
   }
 }

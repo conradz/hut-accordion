@@ -1,5 +1,9 @@
 # Changelog
 
+## next
+
+ * Update `mout` to v0.8.0
+
 ## 0.0.5
 
  * Use delegated events for listeners
