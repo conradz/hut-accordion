@@ -1,6 +1,6 @@
 {
   "name": "hut-accordion",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "HTML UI Toolkit accordion component",
   "main": "index.js",
   "style": "index.css",

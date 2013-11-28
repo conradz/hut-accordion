@@ -1,8 +1,9 @@
 # Changelog
 
-## next
+## 0.0.6
 
  * Update `mout` to v0.8.0
+ * Update `hut-base` to v0.0.3
 
 ## 0.0.5
 
