@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0
+
+ * Update `hut-base` to v0.2.0
+ * Update `chi-classes` to v0.1.0
+ * Remove variables (just override styles instead)
+
 ## 0.0.6
 
  * Update `mout` to v0.8.0
