@@ -42,7 +42,7 @@ events($('#remove-section')).on('click', function() {
     element.removeChild(sections[sections.length - 1]);
 });
 
-},{"../":2,"chi-create":25,"chi-events":36}],2:[function(require,module,exports){
+},{"../":2,"chi-create":5,"chi-events":8}],2:[function(require,module,exports){
 'use strict';
 
 var Emitter = require('emitter-component'),
@@ -103,7 +103,9 @@ Accordion.prototype.select = function(section) {
     this.emit('select', this.selected);
 };
 
-},{"chi-classes":3,"chi-events":36,"emitter-component":39,"mout/lang/inheritPrototype":43}],3:[function(require,module,exports){
+},{"chi-classes":3,"chi-events":8,"emitter-component":11,"mout/lang/inheritPrototype":28}],3:[function(require,module,exports){
+'use strict';
+
 var union = require('mout/array/union'),
     difference = require('mout/array/difference'),
     xor = require('mout/array/xor'),
@@ -120,6 +122,7 @@ function split(input) {
 
 function modifier(action) {
     function modify(node) {
+        /*jshint validthis: true */
         var existing = split(node.className);
         node.className = action(existing, this).join(' ');
     }
@@ -165,7 +168,7 @@ function classList() {
 
 module.exports = classList;
 
-},{"flatten-list":4,"mout/array/contains":6,"mout/array/difference":7,"mout/array/every":8,"mout/array/forEach":10,"mout/array/union":13,"mout/array/xor":15}],4:[function(require,module,exports){
+},{"flatten-list":4,"mout/array/contains":13,"mout/array/difference":14,"mout/array/every":15,"mout/array/forEach":17,"mout/array/union":21,"mout/array/xor":23}],4:[function(require,module,exports){
 var isList;
 if (typeof window !== 'undefined') {
     // Running in a browser
@@ -209,522 +212,8 @@ function flatten(value) {
 module.exports = flatten;
 
 },{}],5:[function(require,module,exports){
+'use strict';
 
-
-    /**
-     * Appends an array to the end of another.
-     * The first array will be modified.
-     */
-    function append(arr1, arr2) {
-        if (arr2 == null) {
-            return arr1;
-        }
-
-        var pad = arr1.length,
-            i = -1,
-            len = arr2.length;
-        while (++i < len) {
-            arr1[pad + i] = arr2[i];
-        }
-        return arr1;
-    }
-    module.exports = append;
-
-
-},{}],6:[function(require,module,exports){
-var indexOf = require('./indexOf');
-
-    /**
-     * If array contains values.
-     */
-    function contains(arr, val) {
-        return indexOf(arr, val) !== -1;
-    }
-    module.exports = contains;
-
-
-},{"./indexOf":11}],7:[function(require,module,exports){
-var unique = require('./unique');
-var filter = require('./filter');
-var some = require('./some');
-var contains = require('./contains');
-
-
-    /**
-     * Return a new Array with elements that aren't present in the other Arrays.
-     */
-    function difference(arr) {
-        var arrs = Array.prototype.slice.call(arguments, 1),
-            result = filter(unique(arr), function(needle){
-                return !some(arrs, function(haystack){
-                    return contains(haystack, needle);
-                });
-            });
-        return result;
-    }
-
-    module.exports = difference;
-
-
-
-},{"./contains":6,"./filter":9,"./some":12,"./unique":14}],8:[function(require,module,exports){
-var makeIterator = require('../function/makeIterator_');
-
-    /**
-     * Array every
-     */
-    function every(arr, callback, thisObj) {
-        callback = makeIterator(callback, thisObj);
-        var result = true;
-        if (arr == null) {
-            return result;
-        }
-
-        var i = -1, len = arr.length;
-        while (++i < len) {
-            // we iterate over sparse items since there is no way to make it
-            // work properly on IE 7-8. see #64
-            if (!callback(arr[i], i, arr) ) {
-                result = false;
-                break;
-            }
-        }
-
-        return result;
-    }
-
-    module.exports = every;
-
-
-},{"../function/makeIterator_":16}],9:[function(require,module,exports){
-var makeIterator = require('../function/makeIterator_');
-
-    /**
-     * Array filter
-     */
-    function filter(arr, callback, thisObj) {
-        callback = makeIterator(callback, thisObj);
-        var results = [];
-        if (arr == null) {
-            return results;
-        }
-
-        var i = -1, len = arr.length, value;
-        while (++i < len) {
-            value = arr[i];
-            if (callback(value, i, arr)) {
-                results.push(value);
-            }
-        }
-
-        return results;
-    }
-
-    module.exports = filter;
-
-
-
-},{"../function/makeIterator_":16}],10:[function(require,module,exports){
-
-
-    /**
-     * Array forEach
-     */
-    function forEach(arr, callback, thisObj) {
-        if (arr == null) {
-            return;
-        }
-        var i = -1,
-            len = arr.length;
-        while (++i < len) {
-            // we iterate over sparse items since there is no way to make it
-            // work properly on IE 7-8. see #64
-            if ( callback.call(thisObj, arr[i], i, arr) === false ) {
-                break;
-            }
-        }
-    }
-
-    module.exports = forEach;
-
-
-
-},{}],11:[function(require,module,exports){
-
-
-    /**
-     * Array.indexOf
-     */
-    function indexOf(arr, item, fromIndex) {
-        fromIndex = fromIndex || 0;
-        if (arr == null) {
-            return -1;
-        }
-
-        var len = arr.length,
-            i = fromIndex < 0 ? len + fromIndex : fromIndex;
-        while (i < len) {
-            // we iterate over sparse items since there is no way to make it
-            // work properly on IE 7-8. see #64
-            if (arr[i] === item) {
-                return i;
-            }
-
-            i++;
-        }
-
-        return -1;
-    }
-
-    module.exports = indexOf;
-
-
-},{}],12:[function(require,module,exports){
-var makeIterator = require('../function/makeIterator_');
-
-    /**
-     * Array some
-     */
-    function some(arr, callback, thisObj) {
-        callback = makeIterator(callback, thisObj);
-        var result = false;
-        if (arr == null) {
-            return result;
-        }
-
-        var i = -1, len = arr.length;
-        while (++i < len) {
-            // we iterate over sparse items since there is no way to make it
-            // work properly on IE 7-8. see #64
-            if ( callback(arr[i], i, arr) ) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
-
-    module.exports = some;
-
-
-},{"../function/makeIterator_":16}],13:[function(require,module,exports){
-var unique = require('./unique');
-var append = require('./append');
-
-    /**
-     * Concat multiple arrays and remove duplicates
-     */
-    function union(arrs) {
-        var results = [];
-        var i = -1, len = arguments.length;
-        while (++i < len) {
-            append(results, arguments[i]);
-        }
-
-        return unique(results);
-    }
-
-    module.exports = union;
-
-
-
-},{"./append":5,"./unique":14}],14:[function(require,module,exports){
-var indexOf = require('./indexOf');
-var filter = require('./filter');
-
-    /**
-     * @return {array} Array of unique items
-     */
-    function unique(arr){
-        return filter(arr, isUnique);
-    }
-
-    function isUnique(item, i, arr){
-        return indexOf(arr, item, i+1) === -1;
-    }
-
-    module.exports = unique;
-
-
-
-},{"./filter":9,"./indexOf":11}],15:[function(require,module,exports){
-var unique = require('./unique');
-var filter = require('./filter');
-var contains = require('./contains');
-
-
-    /**
-     * Exclusive OR. Returns items that are present in a single array.
-     * - like ptyhon's `symmetric_difference`
-     */
-    function xor(arr1, arr2) {
-        arr1 = unique(arr1);
-        arr2 = unique(arr2);
-
-        var a1 = filter(arr1, function(item){
-                return !contains(arr2, item);
-            }),
-            a2 = filter(arr2, function(item){
-                return !contains(arr1, item);
-            });
-
-        return a1.concat(a2);
-    }
-
-    module.exports = xor;
-
-
-
-},{"./contains":6,"./filter":9,"./unique":14}],16:[function(require,module,exports){
-var prop = require('./prop');
-var deepMatches = require('../object/deepMatches');
-
-    /**
-     * Converts argument into a valid iterator.
-     * Used internally on most array/object/collection methods that receives a
-     * callback/iterator providing a shortcut syntax.
-     */
-    function makeIterator(src, thisObj){
-        switch(typeof src) {
-            case 'function':
-                // function is the first to improve perf (most common case)
-                return (typeof thisObj !== 'undefined')? function(val, i, arr){
-                    return src.call(thisObj, val, i, arr);
-                } : src;
-            case 'object':
-                // typeof null == "object"
-                return (src != null)? function(val){
-                    return deepMatches(val, src);
-                } : src;
-            case 'string':
-            case 'number':
-                return prop(src);
-            default:
-                return src;
-        }
-    }
-
-    module.exports = makeIterator;
-
-
-
-},{"../object/deepMatches":21,"./prop":17}],17:[function(require,module,exports){
-
-
-    /**
-     * Returns a function that gets a property of the passed object
-     */
-    function prop(name){
-        return function(obj){
-            return obj[name];
-        };
-    }
-
-    module.exports = prop;
-
-
-
-},{}],18:[function(require,module,exports){
-var isKind = require('./isKind');
-    /**
-     */
-    var isArray = Array.isArray || function (val) {
-        return isKind(val, 'Array');
-    };
-    module.exports = isArray;
-
-
-},{"./isKind":19}],19:[function(require,module,exports){
-var kindOf = require('./kindOf');
-    /**
-     * Check if value is from a specific "kind".
-     */
-    function isKind(val, kind){
-        return kindOf(val) === kind;
-    }
-    module.exports = isKind;
-
-
-},{"./kindOf":20}],20:[function(require,module,exports){
-
-
-    var _rKind = /^\[object (.*)\]$/,
-        _toString = Object.prototype.toString,
-        UNDEF;
-
-    /**
-     * Gets the "kind" of value. (e.g. "String", "Number", etc)
-     */
-    function kindOf(val) {
-        if (val === null) {
-            return 'Null';
-        } else if (val === UNDEF) {
-            return 'Undefined';
-        } else {
-            return _rKind.exec( _toString.call(val) )[1];
-        }
-    }
-    module.exports = kindOf;
-
-
-},{}],21:[function(require,module,exports){
-var forOwn = require('./forOwn');
-var isArray = require('../lang/isArray');
-
-    function containsMatch(array, pattern) {
-        var i = -1, length = array.length;
-        while (++i < length) {
-            if (deepMatches(array[i], pattern)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    function matchArray(target, pattern) {
-        var i = -1, patternLength = pattern.length;
-        while (++i < patternLength) {
-            if (!containsMatch(target, pattern[i])) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    function matchObject(target, pattern) {
-        var result = true;
-        forOwn(pattern, function(val, key) {
-            if (!deepMatches(target[key], val)) {
-                // Return false to break out of forOwn early
-                return (result = false);
-            }
-        });
-
-        return result;
-    }
-
-    /**
-     * Recursively check if the objects match.
-     */
-    function deepMatches(target, pattern){
-        if (target && typeof target === 'object') {
-            if (isArray(target) && isArray(pattern)) {
-                return matchArray(target, pattern);
-            } else {
-                return matchObject(target, pattern);
-            }
-        } else {
-            return target === pattern;
-        }
-    }
-
-    module.exports = deepMatches;
-
-
-
-},{"../lang/isArray":18,"./forOwn":23}],22:[function(require,module,exports){
-
-
-    var _hasDontEnumBug,
-        _dontEnums;
-
-    function checkDontEnum(){
-        _dontEnums = [
-                'toString',
-                'toLocaleString',
-                'valueOf',
-                'hasOwnProperty',
-                'isPrototypeOf',
-                'propertyIsEnumerable',
-                'constructor'
-            ];
-
-        _hasDontEnumBug = true;
-
-        for (var key in {'toString': null}) {
-            _hasDontEnumBug = false;
-        }
-    }
-
-    /**
-     * Similar to Array/forEach but works over object properties and fixes Don't
-     * Enum bug on IE.
-     * based on: http://whattheheadsaid.com/2010/10/a-safer-object-keys-compatibility-implementation
-     */
-    function forIn(obj, fn, thisObj){
-        var key, i = 0;
-        // no need to check if argument is a real object that way we can use
-        // it for arrays, functions, date, etc.
-
-        //post-pone check till needed
-        if (_hasDontEnumBug == null) checkDontEnum();
-
-        for (key in obj) {
-            if (exec(fn, obj, key, thisObj) === false) {
-                break;
-            }
-        }
-
-        if (_hasDontEnumBug) {
-            while (key = _dontEnums[i++]) {
-                // since we aren't using hasOwn check we need to make sure the
-                // property was overwritten
-                if (obj[key] !== Object.prototype[key]) {
-                    if (exec(fn, obj, key, thisObj) === false) {
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    function exec(fn, obj, key, thisObj){
-        return fn.call(thisObj, obj[key], key, obj);
-    }
-
-    module.exports = forIn;
-
-
-
-},{}],23:[function(require,module,exports){
-var hasOwn = require('./hasOwn');
-var forIn = require('./forIn');
-
-    /**
-     * Similar to Array/forEach but works over object properties and fixes Don't
-     * Enum bug on IE.
-     * based on: http://whattheheadsaid.com/2010/10/a-safer-object-keys-compatibility-implementation
-     */
-    function forOwn(obj, fn, thisObj){
-        forIn(obj, function(val, key){
-            if (hasOwn(obj, key)) {
-                return fn.call(thisObj, obj[key], key, obj);
-            }
-        });
-    }
-
-    module.exports = forOwn;
-
-
-
-},{"./forIn":22,"./hasOwn":24}],24:[function(require,module,exports){
-
-
-    /**
-     * Safer Object.hasOwnProperty
-     */
-     function hasOwn(obj, prop){
-         return Object.prototype.hasOwnProperty.call(obj, prop);
-     }
-
-     module.exports = hasOwn;
-
-
-
-},{}],25:[function(require,module,exports){
 var forOwn = require('mout/object/forOwn'),
     forEach = require('mout/array/forEach'),
     isArray = require('mout/lang/isArray'),
@@ -743,6 +232,7 @@ function create(tagName) {
 }
 
 function addContent(value) {
+    /* jshint validthis: true */
     if (typeof value === 'string') {
         this.appendChild(document.createTextNode(value));
     } else if (isPlainObject(value)) {
@@ -755,39 +245,11 @@ function addContent(value) {
 }
 
 function setAttribute(value, name) {
+    /*jshint validthis: true */
     this.setAttribute(name, value);
 }
 
-},{"mout/array/forEach":26,"mout/lang/isArray":27,"mout/lang/isPlainObject":29,"mout/object/forOwn":32}],26:[function(require,module,exports){
-module.exports=require(10)
-},{}],27:[function(require,module,exports){
-module.exports=require(18)
-},{"./isKind":28}],28:[function(require,module,exports){
-module.exports=require(19)
-},{"./kindOf":30}],29:[function(require,module,exports){
-
-
-    /**
-     * Checks if the value is created by the `Object` constructor.
-     */
-    function isPlainObject(value) {
-        return (!!value && typeof value === 'object' &&
-            value.constructor === Object);
-    }
-
-    module.exports = isPlainObject;
-
-
-
-},{}],30:[function(require,module,exports){
-module.exports=require(20)
-},{}],31:[function(require,module,exports){
-module.exports=require(22)
-},{}],32:[function(require,module,exports){
-module.exports=require(23)
-},{"./forIn":31,"./hasOwn":33}],33:[function(require,module,exports){
-module.exports=require(24)
-},{}],34:[function(require,module,exports){
+},{"mout/array/forEach":17,"mout/lang/isArray":29,"mout/lang/isPlainObject":31,"mout/object/forOwn":35}],6:[function(require,module,exports){
 'use strict';
 
 var matches = require('chi-matches');
@@ -846,7 +308,7 @@ function wrap(filter, handler) {
     return wrapper;
 }
 
-},{"chi-matches":37}],35:[function(require,module,exports){
+},{"chi-matches":9}],7:[function(require,module,exports){
 'use strict';
 
 // Fix bug that occurs in at least IE 9 and 10
@@ -906,7 +368,7 @@ function fix(trigger) {
     return fixedTrigger;
 }
 
-},{"mout/array/forEach":41}],36:[function(require,module,exports){
+},{"mout/array/forEach":17}],8:[function(require,module,exports){
 'use strict';
 
 var flatten = require('flatten-list'),
@@ -984,7 +446,7 @@ function createEvent(event) {
     return e;
 }
 
-},{"./delegate":34,"./ie-bug":35,"flatten-list":38,"mout/array/forEach":41}],37:[function(require,module,exports){
+},{"./delegate":6,"./ie-bug":7,"flatten-list":10,"mout/array/forEach":17}],9:[function(require,module,exports){
 // Get the right method, including vendor prefixes
 var proto = Element.prototype,
     method = (
@@ -1044,15 +506,9 @@ if (method) {
     // Not supported
     module.exports = null;
 }
-},{}],38:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports=require(4)
-},{}],39:[function(require,module,exports){
-
-/**
- * Module dependencies.
- */
-
-var index = require('indexof');
+},{}],11:[function(require,module,exports){
 
 /**
  * Expose `Emitter`.
@@ -1121,7 +577,7 @@ Emitter.prototype.once = function(event, fn){
     fn.apply(this, arguments);
   }
 
-  fn._off = on;
+  on.fn = fn;
   this.on(event, on);
   return this;
 };
@@ -1159,8 +615,14 @@ Emitter.prototype.removeEventListener = function(event, fn){
   }
 
   // remove specific handler
-  var i = index(callbacks, fn._off || fn);
-  if (~i) callbacks.splice(i, 1);
+  var cb;
+  for (var i = 0; i < callbacks.length; i++) {
+    cb = callbacks[i];
+    if (cb === fn || cb.fn === fn) {
+      callbacks.splice(i, 1);
+      break;
+    }
+  }
   return this;
 };
 
@@ -1212,20 +674,366 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-},{"indexof":40}],40:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
-var indexOf = [].indexOf;
 
-module.exports = function(arr, obj){
-  if (indexOf) return arr.indexOf(obj);
-  for (var i = 0; i < arr.length; ++i) {
-    if (arr[i] === obj) return i;
-  }
-  return -1;
-};
-},{}],41:[function(require,module,exports){
-module.exports=require(10)
-},{}],42:[function(require,module,exports){
+    /**
+     * Appends an array to the end of another.
+     * The first array will be modified.
+     */
+    function append(arr1, arr2) {
+        if (arr2 == null) {
+            return arr1;
+        }
+
+        var pad = arr1.length,
+            i = -1,
+            len = arr2.length;
+        while (++i < len) {
+            arr1[pad + i] = arr2[i];
+        }
+        return arr1;
+    }
+    module.exports = append;
+
+
+},{}],13:[function(require,module,exports){
+var indexOf = require('./indexOf');
+
+    /**
+     * If array contains values.
+     */
+    function contains(arr, val) {
+        return indexOf(arr, val) !== -1;
+    }
+    module.exports = contains;
+
+
+},{"./indexOf":18}],14:[function(require,module,exports){
+var unique = require('./unique');
+var filter = require('./filter');
+var some = require('./some');
+var contains = require('./contains');
+var slice = require('./slice');
+
+
+    /**
+     * Return a new Array with elements that aren't present in the other Arrays.
+     */
+    function difference(arr) {
+        var arrs = slice(arguments, 1),
+            result = filter(unique(arr), function(needle){
+                return !some(arrs, function(haystack){
+                    return contains(haystack, needle);
+                });
+            });
+        return result;
+    }
+
+    module.exports = difference;
+
+
+
+},{"./contains":13,"./filter":16,"./slice":19,"./some":20,"./unique":22}],15:[function(require,module,exports){
+var makeIterator = require('../function/makeIterator_');
+
+    /**
+     * Array every
+     */
+    function every(arr, callback, thisObj) {
+        callback = makeIterator(callback, thisObj);
+        var result = true;
+        if (arr == null) {
+            return result;
+        }
+
+        var i = -1, len = arr.length;
+        while (++i < len) {
+            // we iterate over sparse items since there is no way to make it
+            // work properly on IE 7-8. see #64
+            if (!callback(arr[i], i, arr) ) {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    module.exports = every;
+
+
+},{"../function/makeIterator_":25}],16:[function(require,module,exports){
+var makeIterator = require('../function/makeIterator_');
+
+    /**
+     * Array filter
+     */
+    function filter(arr, callback, thisObj) {
+        callback = makeIterator(callback, thisObj);
+        var results = [];
+        if (arr == null) {
+            return results;
+        }
+
+        var i = -1, len = arr.length, value;
+        while (++i < len) {
+            value = arr[i];
+            if (callback(value, i, arr)) {
+                results.push(value);
+            }
+        }
+
+        return results;
+    }
+
+    module.exports = filter;
+
+
+
+},{"../function/makeIterator_":25}],17:[function(require,module,exports){
+
+
+    /**
+     * Array forEach
+     */
+    function forEach(arr, callback, thisObj) {
+        if (arr == null) {
+            return;
+        }
+        var i = -1,
+            len = arr.length;
+        while (++i < len) {
+            // we iterate over sparse items since there is no way to make it
+            // work properly on IE 7-8. see #64
+            if ( callback.call(thisObj, arr[i], i, arr) === false ) {
+                break;
+            }
+        }
+    }
+
+    module.exports = forEach;
+
+
+
+},{}],18:[function(require,module,exports){
+
+
+    /**
+     * Array.indexOf
+     */
+    function indexOf(arr, item, fromIndex) {
+        fromIndex = fromIndex || 0;
+        if (arr == null) {
+            return -1;
+        }
+
+        var len = arr.length,
+            i = fromIndex < 0 ? len + fromIndex : fromIndex;
+        while (i < len) {
+            // we iterate over sparse items since there is no way to make it
+            // work properly on IE 7-8. see #64
+            if (arr[i] === item) {
+                return i;
+            }
+
+            i++;
+        }
+
+        return -1;
+    }
+
+    module.exports = indexOf;
+
+
+},{}],19:[function(require,module,exports){
+
+
+    var arrSlice = Array.prototype.slice;
+
+    /**
+     * Create slice of source array or array-like object
+     */
+    function slice(arr, start, end){
+        return arrSlice.call(arr, start, end);
+    }
+
+    module.exports = slice;
+
+
+
+},{}],20:[function(require,module,exports){
+var makeIterator = require('../function/makeIterator_');
+
+    /**
+     * Array some
+     */
+    function some(arr, callback, thisObj) {
+        callback = makeIterator(callback, thisObj);
+        var result = false;
+        if (arr == null) {
+            return result;
+        }
+
+        var i = -1, len = arr.length;
+        while (++i < len) {
+            // we iterate over sparse items since there is no way to make it
+            // work properly on IE 7-8. see #64
+            if ( callback(arr[i], i, arr) ) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    module.exports = some;
+
+
+},{"../function/makeIterator_":25}],21:[function(require,module,exports){
+var unique = require('./unique');
+var append = require('./append');
+
+    /**
+     * Concat multiple arrays and remove duplicates
+     */
+    function union(arrs) {
+        var results = [];
+        var i = -1, len = arguments.length;
+        while (++i < len) {
+            append(results, arguments[i]);
+        }
+
+        return unique(results);
+    }
+
+    module.exports = union;
+
+
+
+},{"./append":12,"./unique":22}],22:[function(require,module,exports){
+var filter = require('./filter');
+
+    /**
+     * @return {array} Array of unique items
+     */
+    function unique(arr, compare){
+        compare = compare || isEqual;
+        return filter(arr, function(item, i, arr){
+            var n = arr.length;
+            while (++i < n) {
+                if ( compare(item, arr[i]) ) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    }
+
+    function isEqual(a, b){
+        return a === b;
+    }
+
+    module.exports = unique;
+
+
+
+},{"./filter":16}],23:[function(require,module,exports){
+var unique = require('./unique');
+var filter = require('./filter');
+var contains = require('./contains');
+
+
+    /**
+     * Exclusive OR. Returns items that are present in a single array.
+     * - like ptyhon's `symmetric_difference`
+     */
+    function xor(arr1, arr2) {
+        arr1 = unique(arr1);
+        arr2 = unique(arr2);
+
+        var a1 = filter(arr1, function(item){
+                return !contains(arr2, item);
+            }),
+            a2 = filter(arr2, function(item){
+                return !contains(arr1, item);
+            });
+
+        return a1.concat(a2);
+    }
+
+    module.exports = xor;
+
+
+
+},{"./contains":13,"./filter":16,"./unique":22}],24:[function(require,module,exports){
+
+
+    /**
+     * Returns the first argument provided to it.
+     */
+    function identity(val){
+        return val;
+    }
+
+    module.exports = identity;
+
+
+
+},{}],25:[function(require,module,exports){
+var identity = require('./identity');
+var prop = require('./prop');
+var deepMatches = require('../object/deepMatches');
+
+    /**
+     * Converts argument into a valid iterator.
+     * Used internally on most array/object/collection methods that receives a
+     * callback/iterator providing a shortcut syntax.
+     */
+    function makeIterator(src, thisObj){
+        if (src == null) {
+            return identity;
+        }
+        switch(typeof src) {
+            case 'function':
+                // function is the first to improve perf (most common case)
+                // also avoid using `Function#call` if not needed, which boosts
+                // perf a lot in some cases
+                return (typeof thisObj !== 'undefined')? function(val, i, arr){
+                    return src.call(thisObj, val, i, arr);
+                } : src;
+            case 'object':
+                return function(val){
+                    return deepMatches(val, src);
+                };
+            case 'string':
+            case 'number':
+                return prop(src);
+        }
+    }
+
+    module.exports = makeIterator;
+
+
+
+},{"../object/deepMatches":33,"./identity":24,"./prop":26}],26:[function(require,module,exports){
+
+
+    /**
+     * Returns a function that gets a property of the passed object
+     */
+    function prop(name){
+        return function(obj){
+            return obj[name];
+        };
+    }
+
+    module.exports = prop;
+
+
+
+},{}],27:[function(require,module,exports){
 var mixIn = require('../object/mixIn');
 
     /**
@@ -1245,7 +1053,7 @@ var mixIn = require('../object/mixIn');
 
 
 
-},{"../object/mixIn":47}],43:[function(require,module,exports){
+},{"../object/mixIn":37}],28:[function(require,module,exports){
 var createObject = require('./createObject');
 
     /**
@@ -1264,13 +1072,221 @@ var createObject = require('./createObject');
     module.exports = inheritPrototype;
 
 
-},{"./createObject":42}],44:[function(require,module,exports){
-module.exports=require(22)
-},{}],45:[function(require,module,exports){
-module.exports=require(23)
-},{"./forIn":44,"./hasOwn":46}],46:[function(require,module,exports){
-module.exports=require(24)
-},{}],47:[function(require,module,exports){
+},{"./createObject":27}],29:[function(require,module,exports){
+var isKind = require('./isKind');
+    /**
+     */
+    var isArray = Array.isArray || function (val) {
+        return isKind(val, 'Array');
+    };
+    module.exports = isArray;
+
+
+},{"./isKind":30}],30:[function(require,module,exports){
+var kindOf = require('./kindOf');
+    /**
+     * Check if value is from a specific "kind".
+     */
+    function isKind(val, kind){
+        return kindOf(val) === kind;
+    }
+    module.exports = isKind;
+
+
+},{"./kindOf":32}],31:[function(require,module,exports){
+
+
+    /**
+     * Checks if the value is created by the `Object` constructor.
+     */
+    function isPlainObject(value) {
+        return (!!value && typeof value === 'object' &&
+            value.constructor === Object);
+    }
+
+    module.exports = isPlainObject;
+
+
+
+},{}],32:[function(require,module,exports){
+
+
+    var _rKind = /^\[object (.*)\]$/,
+        _toString = Object.prototype.toString,
+        UNDEF;
+
+    /**
+     * Gets the "kind" of value. (e.g. "String", "Number", etc)
+     */
+    function kindOf(val) {
+        if (val === null) {
+            return 'Null';
+        } else if (val === UNDEF) {
+            return 'Undefined';
+        } else {
+            return _rKind.exec( _toString.call(val) )[1];
+        }
+    }
+    module.exports = kindOf;
+
+
+},{}],33:[function(require,module,exports){
+var forOwn = require('./forOwn');
+var isArray = require('../lang/isArray');
+
+    function containsMatch(array, pattern) {
+        var i = -1, length = array.length;
+        while (++i < length) {
+            if (deepMatches(array[i], pattern)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function matchArray(target, pattern) {
+        var i = -1, patternLength = pattern.length;
+        while (++i < patternLength) {
+            if (!containsMatch(target, pattern[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function matchObject(target, pattern) {
+        var result = true;
+        forOwn(pattern, function(val, key) {
+            if (!deepMatches(target[key], val)) {
+                // Return false to break out of forOwn early
+                return (result = false);
+            }
+        });
+
+        return result;
+    }
+
+    /**
+     * Recursively check if the objects match.
+     */
+    function deepMatches(target, pattern){
+        if (target && typeof target === 'object') {
+            if (isArray(target) && isArray(pattern)) {
+                return matchArray(target, pattern);
+            } else {
+                return matchObject(target, pattern);
+            }
+        } else {
+            return target === pattern;
+        }
+    }
+
+    module.exports = deepMatches;
+
+
+
+},{"../lang/isArray":29,"./forOwn":35}],34:[function(require,module,exports){
+
+
+    var _hasDontEnumBug,
+        _dontEnums;
+
+    function checkDontEnum(){
+        _dontEnums = [
+                'toString',
+                'toLocaleString',
+                'valueOf',
+                'hasOwnProperty',
+                'isPrototypeOf',
+                'propertyIsEnumerable',
+                'constructor'
+            ];
+
+        _hasDontEnumBug = true;
+
+        for (var key in {'toString': null}) {
+            _hasDontEnumBug = false;
+        }
+    }
+
+    /**
+     * Similar to Array/forEach but works over object properties and fixes Don't
+     * Enum bug on IE.
+     * based on: http://whattheheadsaid.com/2010/10/a-safer-object-keys-compatibility-implementation
+     */
+    function forIn(obj, fn, thisObj){
+        var key, i = 0;
+        // no need to check if argument is a real object that way we can use
+        // it for arrays, functions, date, etc.
+
+        //post-pone check till needed
+        if (_hasDontEnumBug == null) checkDontEnum();
+
+        for (key in obj) {
+            if (exec(fn, obj, key, thisObj) === false) {
+                break;
+            }
+        }
+
+        if (_hasDontEnumBug) {
+            while (key = _dontEnums[i++]) {
+                // since we aren't using hasOwn check we need to make sure the
+                // property was overwritten
+                if (obj[key] !== Object.prototype[key]) {
+                    if (exec(fn, obj, key, thisObj) === false) {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    function exec(fn, obj, key, thisObj){
+        return fn.call(thisObj, obj[key], key, obj);
+    }
+
+    module.exports = forIn;
+
+
+
+},{}],35:[function(require,module,exports){
+var hasOwn = require('./hasOwn');
+var forIn = require('./forIn');
+
+    /**
+     * Similar to Array/forEach but works over object properties and fixes Don't
+     * Enum bug on IE.
+     * based on: http://whattheheadsaid.com/2010/10/a-safer-object-keys-compatibility-implementation
+     */
+    function forOwn(obj, fn, thisObj){
+        forIn(obj, function(val, key){
+            if (hasOwn(obj, key)) {
+                return fn.call(thisObj, obj[key], key, obj);
+            }
+        });
+    }
+
+    module.exports = forOwn;
+
+
+
+},{"./forIn":34,"./hasOwn":36}],36:[function(require,module,exports){
+
+
+    /**
+     * Safer Object.hasOwnProperty
+     */
+     function hasOwn(obj, prop){
+         return Object.prototype.hasOwnProperty.call(obj, prop);
+     }
+
+     module.exports = hasOwn;
+
+
+
+},{}],37:[function(require,module,exports){
 var forOwn = require('./forOwn');
 
     /**
@@ -1300,5 +1316,5 @@ var forOwn = require('./forOwn');
     module.exports = mixIn;
 
 
-},{"./forOwn":45}]},{},[1])
+},{"./forOwn":35}]},{},[1])
 ;

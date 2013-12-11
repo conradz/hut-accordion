@@ -1,35 +1,3 @@
-/*
- * Default base settings
- * Many of these settings are from Bootstrap (https://github.com/twbs/bootstrap)
- */
-
-:root {
-  /* Font settings for body */
-  var-font-family-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  var-font-size-base: 16px;
-  var-line-height-base: 1.5;
-  /* Font settings for headings */
-  var-font-family-heading: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  var-line-height-heading: 1.2;
-  var-font-weight-heading: 500;
-  var-font-size-h1: 2.6em;
-  var-font-size-h2: 2.15em;
-  var-font-size-h3: 1.70em;
-  var-font-size-h4: 1.25em;
-  var-font-size-h5: 1em;
-  var-font-size-h6: 0.85em;
-  /* Color for <hr> element */
-  var-hr-color: #CCC;
-  var-button-padding: 10px 20px;
-  var-button-radius: 4px;
-  var-button-text-color: #FFF;
-  var-button-color-default: #0093B8;
-  var-button-color-hover: #0FC3F0;
-  var-button-color-active: #007A99;
-  var-button-color-disabled: #9FA3A5;
-  var-button-transition-time: 0.3s;
-}
-
 /* Basic layout styles */
 
 *,
@@ -56,35 +24,13 @@ body {
   overflow: hidden;
 }
 
-/* Element definitions for HTML5 elements, taken from normalize.css */
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-nav,
-section,
-summary {
-  display: block;
-}
-
-audio,
-canvas,
-video {
-  display: inline-block;
-}
-
 /* Fonts and other typographical settings */
 
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 100%;
   line-height: 1.5;
+  color: #333;
 }
 
 h1,
@@ -93,38 +39,37 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.2;
-  margin: 20px 0 10px 0;
+  margin: 0.8rem 0 0.4rem 0;
 }
 
 h1 {
-  font-size: 2.6em;
+  font-size: 2.6rem;
 }
 
 h2 {
-  font-size: 2.15em;
+  font-size: 2.15rem;
 }
 
 h3 {
-  font-size: 1.70em;
+  font-size: 1.7rem;
 }
 
 h4 {
-  font-size: 1.25em;
+  font-size: 1.25rem;
 }
 
 h5 {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 h6 {
-  font-size: 0.85em;
+  font-size: 0.85rem;
 }
 
 p {
-  margin: 0 0 10px 0;
+  margin: 0 0 0.5rem 0;
 }
 
 hr {
@@ -138,49 +83,68 @@ hr {
 ul,
 ol {
   margin: 0;
-  padding: 0 0 0 40px;
+  padding: 0 0 0 1.5em;
 }
 
 button {
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  color: #FFF;
-  background-color: #0093B8;
-  transition: background-color 0.3s;
+  border: 1px solid #999;
+  padding: 0.25em 0.75em;
+  background-color: #FFF;
+  font: inherit;
+  color: inherit;
+  transition: background-color 0.2s;
 }
 
 button:hover,
 button.hover {
-  background-color: #0FC3F0;
+  background-color: #EEE;
 }
 
 button:active,
 button.active {
-  background-color: #007A99;
+  background-color: #CCC;
 }
 
 button:disabled {
-  background-color: #9FA3A5;
+  background-color: #EEE;
+  border-color: #BBB;
+  color: #BBB;
 }
 
-:root {
-  /* Color for the border around the accordion sections */
-  var-accordion-border-color: #CCC;
-  /* Horizontal padding for the accordion sections */
-  var-accordion-padding: 10px;
-  /* Vertical margin for the accordion headings */
-  var-accordion-heading-margin: 10px;
-  /* Time for the slide in animation */
-  var-accordion-slide-in-time: 0.3s;
-  /* Time for the slide out animation */
-  var-accordion-slide-out-time: 0.2s;
+input,
+label {
+  display: block;
+  width: 100%;
+}
+
+input {
+  color: inherit;
+  font: inherit;
+  /* line-height must be normal in Firefox, make it the same cross-browser */
+  line-height: normal;
+  outline: none;
+  border: 1px solid #999;
+  padding: 0.25em 0.5em;
+  margin: 0 0 0.5rem 0;
+  transition: 0.2s border-color;
+}
+
+input:focus {
+  border-color: #666;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline-block;
+  width: auto;
+  padding: 0;
+  border: none;
 }
 
 .hut-accordion .accordion-section {
-  border: 1px solid #CCC;
-  padding: 0 10px;
-  margin-bottom: 5px;
+  border: 1px solid #999;
+  padding: 0 0.5em;
+  margin-bottom: 0.5rem;
   overflow: hidden;
 }
 
@@ -195,7 +159,7 @@ button:disabled {
 .hut-accordion .accordion-header h5,
 .hut-accordion .accordion-header h6 {
   /* Make all headings have the same top and bottom margin */
-  margin: 10px 0;
+  margin: 0.5rem 0;
 }
 
 .hut-accordion .accordion-content {
@@ -213,18 +177,18 @@ button:disabled {
 }
 
 .hut-accordion .accordion-selected .accordion-content {
-  max-height: 100000px;
   left: 0;
+  max-height: 100000px;
   /* When transitioning in when no other section is being removed */
-  /* Immediately slide out */
+  /* Immediately slide in */
   transition-delay: 0s, 0s;
   transition-duration: 0.3s, 0s;
 }
 
 .hut-accordion.accordion-removing .accordion-selected .accordion-content {
   /* When transitioning in when another section is being removed */
-  /* Wait to until other section is collapsed */
-  transition-delay: 0.2s, 0.2s;
+  /* Wait to slide in until other section is collapsed */
+  transition-delay: 0.2s, 0.3s;
 }
 
 body {
