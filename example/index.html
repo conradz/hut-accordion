@@ -3,23 +3,20 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>HUT Modal</title>
+        <title>HUT Accordion</title>
         <link rel="stylesheet" href="example.css">
     </head>
     <body>
-        <h1>Accordion Example</h1>
-
+        <h1>hut-accordion</h1>
         <p>
-            Click on the section headings to open a section. The buttons below
-            demonstrate control from JS.
-        </p>
-        <p>
-            <button id="select-more">Select More</button>
-            <button id="collapse">Collapse</button>
-            <button id="add-section">Add Section</button>
-            <button id="remove-section">Remove Section</button>
+            <a href="https://github.com/conradz/hut-accordion/">hut-accordion</a>
+            is a simple HTML accordion module that displays one section of
+            content at a time from a list of sections. It contains a minimum
+            amount of styling so that you can customize it to your needs. The
+            example below shows the accordion in action.
         </p>
 
+        <h2>example</h2>
         <div id="my-accordion" class="hut-accordion">
             <div class="accordion-section">
                 <header class="accordion-header">
@@ -82,6 +79,18 @@
                 </section>
             </div>
         </div>
+
+        <p>
+            The buttons below demonstrate how to control the accordion using
+            JS. They are not needed for normal accordion operation.
+        </p>
+
+        <p>
+            <button id="select-more">Select More</button>
+            <button id="collapse">Collapse</button>
+            <button id="add-section">Add Section</button>
+            <button id="remove-section">Remove Section</button>
+        </p>
 
         <script src="example.js"></script>
     </body>

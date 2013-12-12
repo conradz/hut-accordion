@@ -1,23 +1,26 @@
 # hut-accordion
 
-[![NPM](https://nodei.co/npm/hut-accordion.png?compact=true)](https://nodei.co/npm/hut-accordion/)
-
 [![Build Status](https://drone.io/github.com/conradz/hut-accordion/status.png)](https://drone.io/github.com/conradz/hut-accordion/latest)
 [![Dependency Status](https://david-dm.org/conradz/hut-accordion.png)](https://david-dm.org/conradz/hut-accordion)
 
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/hut-accordion.svg)](https://saucelabs.com/u/hut-accordion)
 
-HTML UI Toolkit accordion component
+## intro
 
-Check out the [example](http://conradz.github.io/hut-accordion)!
+A simple HTML accordion module that creates an accordion that displays one
+section of content at a time from a list of sections. It contains a minimum
+amount of styling so that you can customize it to your needs. See the
+[example](http://conradz.github.io/hut-accordion/) to see it in action.
 
-An accordion where only one section can be opened at a time from multiple
-sections.
+## usage
 
-## Example
+ 1. Install using [npm](https://npmjs.org/) - `npm install --save hut-accordion`
+ 2. Import styling using [rework-npm](https://github.com/conradz/rework-npm/) -
+    `@import "hut-accordion";`
+ 3. Load JS using [browserify](https://github.com/substack/node-browserify/) -
+    `var Accordion = require('hut-accordion');`
 
-Use the following HTML and JS to create an accordion. When a header is clicked,
-it will be opened. If that section is currently opened, it will be closed.
+## code
 
 ```html
 <div id="my-accordion" class="hut-accordion">
@@ -60,7 +63,7 @@ myAccordion.select(document.querySelector('#dog-section'));
 myAccordion.select(null);
 ```
 
-## JS Reference
+## reference
 
 ### `new Accordion(element)`
 
